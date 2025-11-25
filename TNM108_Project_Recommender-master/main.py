@@ -15,7 +15,7 @@ from nltk.corpus import stopwords
 
 
 # Keywords
-words = pd.read_csv("./keywords_with_genres.csv")
+words = pd.read_csv("TNM108_Project_Recommender-master\keywords_with_genres.csv")
 
 # User input
 userInput = input("Write a review: ")
