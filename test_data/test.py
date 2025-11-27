@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -94,7 +95,7 @@ elif control == 1:
 
     # we only use the descriptions right now. using title so that we actually 
     # can write what movie we recomend
-    usecols = ["Title, Description"]
+    usecols = ["Title", "Description"]
 
     # Read the CSV file
     df = pd.read_csv("test_data/16k_Movies.csv", usecols=usecols)
@@ -103,20 +104,25 @@ elif control == 1:
     embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
     # 3. Compute embeddings for reviews
-    stop_flag = show_loading("Computing embeddings")
+    # using the flag to get the "loading"
+    # stop_flag = show_loading("Computing embeddings")
+
     review_texts = df['Description'].tolist()
-    titles = df['Titles'].tolist()
-    review_embeddings = embedder.embed_documents(review_texts)
+    titles = df['Title'].tolist()
+    # compute embeddings here (really slow)
+    # review_embeddings = embedder.embed_documents(review_texts)
+
+    # using embeddings from npy file
+    review_embeddings = np.load("test_data/movie_embeddings.npy")
 
     # 4. Embedd the user input
-
     user_embedding = embedder.embed_query(userInput)
 
     # 5. Compute similarity
     similarities = cosine_similarity([user_embedding], review_embeddings)[0]
 
     # stop the flag to since the program has loaded everything
-    stop_flag.set()
+    # stop_flag.set()
 
     # 6. Find best match
     best_idx = similarities.argmax()

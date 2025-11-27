@@ -14,3 +14,5 @@ embeddings = embedder.embed_documents(texts)
 
 # Save embeddings to disk
 np.save("movie_embeddings.npy", embeddings)
+
+print("done!")
