@@ -99,6 +99,7 @@ elif control == 1:
 
     # Read the CSV file
     df = pd.read_csv("test_data/16k_Movies.csv", usecols=usecols)
+    
 
     # 2. Initialize embeddings
     embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
@@ -108,6 +109,9 @@ elif control == 1:
     # stop_flag = show_loading("Computing embeddings")
 
     review_texts = df['Description'].tolist()
+
+    # printing one text for reference
+    #print(review_texts[1])
     titles = df['Title'].tolist()
     # compute embeddings here (really slow)
     # review_embeddings = embedder.embed_documents(review_texts)
