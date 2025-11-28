@@ -22,6 +22,7 @@ print(desc_texts[1])
 text = (
     "Ed and Lorraine Warren, world-renowned investigators of supernatural events, are called in to help a family terrorized by dark forces. In the family’s house, deep in the countryside, the Warrens are forced to confront a powerful demonic presence."
 )
+
 # Run classifier
 scores = classifier(text)[0]
 
