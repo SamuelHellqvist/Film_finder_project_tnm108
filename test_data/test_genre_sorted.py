@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 
 # == functions ==
@@ -10,20 +10,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 import threading
 import time
 import sys
-
-def show_loading(message="Loading..."):
-    stop_flag = threading.Event()
-
-    def loader():
-        while not stop_flag.is_set():
-            for char in "|/-\\":
-                sys.stdout.write(f"\r{message} {char}")
-                sys.stdout.flush()
-                time.sleep(0.2)
-
-    t = threading.Thread(target=loader)
-    t.start()
-    return stop_flag
 
 #using the latest version of the embedder
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
@@ -47,6 +33,8 @@ keyword_matrix = tfidf_vectorizer.fit_transform(film_data['combined_keywords'])
 
 # User input
 userInput = input("Write a review: ")
+
+user_input_genre = input("What genre do you want to watch? ")
 
 while userInput == "":
     userInput = input("Please write a review: ")
@@ -92,13 +80,24 @@ elif control == 1:
     import pandas as pd
     from langchain_community.embeddings import HuggingFaceEmbeddings
     from sklearn.metrics.pairwise import cosine_similarity
+    import sys
 
     # we only use the descriptions right now. using title so that we actually 
     # can write what movie we recomend
-    usecols = ["Title", "Description"]
+    usecols = ["Title", "Description", "Genre"]
 
     # Read the CSV file
     df = pd.read_csv("test_data/16k_Movies.csv", usecols=usecols)
+
+    # Filter dataframe by user-selected genre (case-insensitive, literal substring match)
+    genre_query = (user_input_genre or "").strip()
+    if genre_query:
+        df['Genre'] = df['Genre'].fillna('').astype(str)
+        df = df[df['Genre'].str.contains(genre_query, case=False, na=False, regex=False)].reset_index(drop=True)
+
+    if df.empty:
+        print(f"No movies found for genre: '{genre_query}'")
+        sys.exit(0)
 
     # 2. Initialize embeddings
     embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
