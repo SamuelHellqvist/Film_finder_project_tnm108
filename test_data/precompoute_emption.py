@@ -11,7 +11,9 @@ df = pd.read_csv("test_data/16k_Movies.csv")  # adapt path
 classifier = pipeline(
     "text-classification",
     model="j-hartmann/emotion-english-distilroberta-base",
-    return_all_scores=True
+    top_k=None,       # same idea as return_all_scores=True
+    truncation=True,
+    max_length=512
 )
 
 # 3. Process all descriptions
@@ -19,7 +21,7 @@ emotion_labels = ["anger", "disgust", "fear", "joy", "neutral", "sadness", "surp
 
 vectors = []
 
-for text in df['Description'][0:20]:
+for text in df['Description']:
     if isinstance(text, float) and pd.isna(text):
         text = ""
     scores = classifier(text)[0]  # list of dicts
