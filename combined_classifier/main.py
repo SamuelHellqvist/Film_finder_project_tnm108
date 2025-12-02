@@ -1,22 +1,23 @@
 import pandas as pd
 import numpy as np
-from combined_classifier.classifier_embeddings import classify as classify_embeddings
-from combined_classifier.classifier_sentiment import classify as classify_sentiment
-from combined_classifier.classifier_keywords import classify as classify_keywords
+from classifier_embeddings import classify as classify_embeddings
+from classifier_sentiment import classify as classify_sentiment
+from classifier_keywords import classify as classify_keywords
 
 # Load movie data from CSV
-movies_df = pd.read_csv("data/movies.csv")
+movies_df = pd.read_csv("test_data/16k_Movies.csv")
 
 # Load embeddings
-movie_embeddings = np.load("data/movie_embeddings.npy")
+movie_embeddings = np.load("test_data/movie_embeddings.npy")
 
 # Get user input
 user_input = input("Describe the movie you want: ")
 
 # Run classifiers
 results_embeddings = classify_embeddings(user_input, movie_embeddings)
-results_sentiment = classify_sentiment(user_input, movies_df)
-results_keywords = classify_keywords(user_input, movies_df)
+results_sentiment = classify_sentiment(user_input, np.load("test_data/emotion_vectors.npy"))
+print("Embeddaing & Sentiment work")
+results_keywords = classify_keywords(user_input, movies_df, usecols= ['Title', 'Description'] )
 
 # Combine results
 combined_scores = {}
