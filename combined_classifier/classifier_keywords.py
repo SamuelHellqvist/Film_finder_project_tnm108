@@ -8,7 +8,7 @@ tfidf_vectorizer = TfidfVectorizer(stop_words='english')
 print("TF-IDF vectorizer initialized.")
 def classify(user_input, movie_df_path, usecols):
     # Load movie data from CSV
-    film_data = pd.read_csv(movie_df_path, usecols=usecols)
+    film_data = movie_df_path[usecols].copy()
 
     # Ensure descriptions are clean
     film_data['Description'] = film_data['Description'].fillna('')
