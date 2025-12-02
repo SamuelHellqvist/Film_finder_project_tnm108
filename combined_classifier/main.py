@@ -23,9 +23,17 @@ for res in [results_embeddings, results_sentiment, results_keywords]:
     for movie_id, score in res:
         combined_scores[movie_id] = combined_scores.get(movie_id, 0) + score
 
-top_movies = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[:5]
+top_movies = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[:10]
+
+# debug prints
+print("len(results_embeddings):", len(results_embeddings))
+print("len(results_sentiment):", len(results_sentiment))
+print("len(results_keywords):", len(results_keywords))
+print("number of unique movies in combined_scores:", len(combined_scores))
+
 
 print("\nTop recommendations:")
 for movie_id, score in top_movies:
     movie = movies_df.iloc[movie_id]  # index-based lookup
     print(f"{movie['Title']} - {movie['Description']} (Score: {score:.2f})")
+    print("---------------------------------------------------")
