@@ -14,11 +14,17 @@ movie_embeddings = np.load("test_data/movie_embeddings.npy")
 user_input = input("Describe the movie you want: ")
 
 # Run classifiers
-results_embeddings = classify_embeddings(user_input, movie_embeddings)
-results_sentiment = classify_sentiment(user_input, np.load("test_data/emotion_vectors.npy"))
-print("Embeddaing & Sentiment work")
-results_keywords = classify_keywords(user_input, movies_df, usecols= ['Title', 'Description'] )
+results_embeddings = classify_embeddings(user_input, movie_embeddings, movies_df)
+print ("embedding results: ", results_embeddings)
+results_sentiment = classify_sentiment(
+    user_input,
+    np.load("test_data/emotion_vectors.npy"),   # must be shape (num_movies, 7)
+    movies_df
+)
+print ("sentiment results: ", results_sentiment)
 
+results_keywords = classify_keywords(user_input, movies_df, usecols= ['Title', 'Description'] )
+print("keywords results: ", results_keywords)
 # Combine results
 combined_scores = {}
 for res in [results_embeddings, results_sentiment, results_keywords]:
@@ -30,4 +36,4 @@ top_movies = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[:
 print("\nTop recommendations:")
 for movie_id, score in top_movies:
     movie = movies_df[movies_df["id"] == movie_id].iloc[0]
-    print(f"{movie['title']} - {movie['description']} (Score: {score:.2f})")
+    print(f"{movie['Title']} - {movie['Description']} (Score: {score:.2f})")
