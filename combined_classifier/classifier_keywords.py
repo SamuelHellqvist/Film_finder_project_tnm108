@@ -1,31 +1,30 @@
-# Defined the model
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+
+# Define the TF-IDF model globally (optional for efficiency)
 tfidf_vectorizer = TfidfVectorizer(stop_words='english')
 
-# get the keybword matrix to use as data to compare the user input to
-# Read the CSV file
-usecols = ['Title', 'Description', 'Genres']
+def classify(user_input, movie_df_path, usecols=['id', 'Description']):
+    # Load movie data from CSV
+    film_data = pd.read_csv(movie_df_path, usecols=usecols)
 
-# get whats important
-film_data = pd.read_csv("test_data/16k_Movies.csv", usecols=usecols)
+    # Ensure descriptions are clean
+    film_data['Description'] = film_data['Description'].fillna('')
 
-# use the descriptions to get a matrix of keyowrds
-film_data['combined_keywords'] = film_data['Description'].fillna('')
+    # Create TF-IDF matrix for all movie descriptions
+    keyword_matrix = tfidf_vectorizer.fit_transform(film_data['Description'])
 
-# use tf-idf on the data
-keyword_matrix = tfidf_vectorizer.fit_transform(film_data['combined_keywords'])
+    # Transform user input into TF-IDF
+    input_tfidf = tfidf_vectorizer.transform([user_input])
 
-# Get the tf-idf from the user input
-userString = [userInput]
-input_tfidf = tfidf_vectorizer.transform(userString)
+    # Compute cosine similarity
+    similarities = cosine_similarity(input_tfidf, keyword_matrix)[0]
 
-# use cosine similarity between the tf-idf from user input and from keywords
-cos_similarity = cosine_similarity(input_tfidf, keyword_matrix)
-csims = cos_similarity[0]
+    # Get top 10 most similar movies
+    top_indices = similarities.argsort()[-10:][::-1]
 
-film_data['Percentage Match'] = csims * 100
-film_data = film_data.sort_values(by=['Percentage Match'], ascending=False)
-film_data = film_data[(film_data['Percentage Match'] > 0.0)]
-film_data = film_data.set_index('Percentage Match')
-
-# creating a variable for the 10 best matches
-top_recommendations = film_data.head(10)
+    # Return list of (movie_id, score)
+    results = [(int(film_data.iloc[idx]['id']), float(similarities[idx])) for idx in top_indices]
+    return results
