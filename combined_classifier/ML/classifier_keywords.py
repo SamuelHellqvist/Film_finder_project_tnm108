@@ -1,6 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
+import numpy as np
 
 tfidf_vectorizer = TfidfVectorizer(stop_words='english')
 print("TF-IDF vectorizer initialized.")
@@ -27,7 +28,6 @@ def classify(user_input: str, movies_df: pd.DataFrame, usecols=None):
         similarities = (similarities - min_s) / (max_s - min_s)
     else:
         similarities = np.ones_like(similarities)
-        
     top_indices = similarities.argsort()[-10:][::-1]
 
     # IMPORTANT: use DataFrame index as ID
