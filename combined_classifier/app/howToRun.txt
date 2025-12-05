@@ -1,0 +1,6 @@
+HOW TO RUN THIS PROGRAM
+1. Open terminal (ctrl + ö)
+2. use this command: python -m combined_classifier.app.server
+3. Press the link provided in the terminal
+4. Success! d:^)
+

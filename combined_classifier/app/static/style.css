@@ -1,76 +1,47 @@
 
 :root {
-  /* Core palette (from the image) */
-  --clr-sky:    #9CC6DB; /* rgb(156, 198, 219) */
-  --clr-cream:  #FCF6D9; /* rgb(252, 246, 217) */
-  --clr-rust:   #CF4B00; /* rgb(207, 75, 0) */
-  --clr-sand:   #DDBA7D; /* rgb(221, 186, 125) */
-
-  /* RGB values (handy for rgba() uses) */
-  --rgb-sky:   156, 198, 219;
-  --rgb-cream: 252, 246, 217;
-  --rgb-rust:  207, 75, 0;
-  --rgb-sand:  221, 186, 125;
-
-  /* Suggested roles (optional) */
-  --color-bg:        var(--clr-cream);
-  --color-surface:   var(--clr-sand);
-  --color-primary:   var(--clr-rust);
-  --color-accent:    var(--clr-sky);
-  --color-on-bg:     #1b1b1b;    /* text on cream */
-  --color-on-primary:#ffffff;    /* text on rust */
+  --color-persian-indigo: #27187E; /* Persian Indigo */
+  --color-cornflower-blue: #758BFD; /* Cornflower Blue */
+  --color-periwinkle: #AEB8FE; /* Periwinkle */
+  --color-anti-flash-white: #F1F2F6; /* Anti-Flash White */
+  --color-ut-orange: #FF8600; /* UT Orange */
 }
 
-
-body {
+body{
+    background-color: var(--color-anti-flash-white);
     font-family: sans-serif;
-    background-color: var(--color-bg);
+    margin: 0;
 }
 
 header{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-header h1 {
-    color: var(--color-accent);
-    font-weight: bold;
-    font-size: 3rem;
-    text-decoration: underline;
+header h1{
+  color: var(--color-persian-indigo);
+  font-size: 3rem;
 }
 
-header h2{
-    color: var(--color-on-bg);
+form{
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
-#in_and_out{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+form input{
+  width: 50%;
+  height: 3rem;
 }
 
-h3{
-    color: var(--color-on-bg);
-}
-
-#in_and_out form{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-primary);
-}
-
-#in_and_out form input{
-    background-color: var(--color-surface);
-    color: var(--color-on-bg);
-    height: 16rem;
-}
-
-#in_and_out #output #output_window{
-    width: 100%;
-    height: 1rem;
-    background-color: var(--color-surface);
-    color: var(--color-on-bg);
+form button{
+  background-color: var(--color-periwinkle);
+  font-size: 1rem;
+  margin-top: 1rem;
+  font-weight: bold;
 }

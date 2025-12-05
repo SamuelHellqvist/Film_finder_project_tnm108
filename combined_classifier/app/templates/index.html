@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-<<<<<<< Updated upstream
-  
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
 </head>
 <body>
-    <h1 class="right">Film finder</h1>
-    <h2 class="left">Learn more: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></a></h2>
+    <header>
+        <h1>Film finder</h1>
+    <h2>Learn more: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Our blog</a></h2>
+    </header>
+    
    
     <form method="POST" action="/predict">
         <input type="text" placeholder="what do you want to watch?" name="user_text" />
@@ -17,39 +19,3 @@
     </form>
 </body>
 </html>
-=======
-
-    <link
-      href="{{ url_for('static', filename='style.css') }}"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header>
-      <h1 class="left">Film finder</h1>
-      <h2 class="right">
-        Learn more:
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          >Link to our blog</a
-        >
-      </h2>
-    </header>
-
-    <div id="in_and_out">
-      <div id="input">
-        <h3>What type of movie do you want to watch?</h3>
-        <form>
-          <input type="text" placeholder="Enter search term" />
-          <button type="submit">Go</button>
-        </form>
-      </div>
-      <div id = "output">
-        <h3>Our suggestions:</h3>
-        <div id="output_window">
-            hello
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
->>>>>>> Stashed changes
