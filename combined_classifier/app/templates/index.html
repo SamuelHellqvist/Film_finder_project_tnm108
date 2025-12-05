@@ -9,8 +9,9 @@
 <body>
     <h1 class="right">Film finder</h1>
     <h2 class="left">Learn more: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></a></h2>
-    <form>
-        <input type="text" placeholder="Enter search term">
+   
+    <form method="POST" action="/predict">
+        <input type="text" placeholder="what do you want to watch?" name="user_text" />
         <button type="submit">Go</button>
     </form>
 </body>

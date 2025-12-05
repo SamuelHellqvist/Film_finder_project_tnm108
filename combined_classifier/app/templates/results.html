@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Results</title>
+</head>
+<body>
+    <h1>Top recommendations</h1>
+
+    <ul>
+    {% for movie in movies %}
+        <li>
+            <strong>{{ movie.title }}</strong><br>
+            {{ movie.description }}<br>
+            Score: {{ movie.score }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="/">Go back</a>
+</body>
+</html>

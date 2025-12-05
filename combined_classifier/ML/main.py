@@ -1,48 +1,47 @@
 import pandas as pd
 import numpy as np
-from classifier_embeddings import classify as classify_embeddings
-from classifier_sentiment import classify as classify_sentiment
-from classifier_keywords import classify as classify_keywords
+from .classifier_embeddings import classify as classify_embeddings
+from .classifier_sentiment import classify as classify_sentiment
+from .classifier_keywords import classify as classify_keywords
 
 # Load movie data from CSV
 movies_df = pd.read_csv("test_data/16k_Movies.csv")
-movies_df = pd.read_csv("test_data/16k_Movies.csv")
+#movies_df = pd.read_csv("test_data/16k_Movies.csv")
 movie_embeddings = np.load("test_data/movie_embeddings.npy")
 emotion_vectors = np.load("test_data/emotion_vectors.npy")  # must be (num_movies, 7)
 
-user_input = input("Describe the movie you want: ")
+#user_input = input("Describe the movie you want: ")
+#GET IT FROM FLASK INSTEAD
 
-results_embeddings = classify_embeddings(user_input, movie_embeddings)
-results_sentiment = classify_sentiment(user_input, emotion_vectors)
-print("Embedding & Sentiment work")
-results_keywords = classify_keywords(user_input, movies_df, usecols=["Title", "Description"])
+def run_classifier(user_input):
+    """Return the top 10 movie recommendations for a given text."""
 
-combined_scores = {}
-for res in [results_embeddings, results_sentiment, results_keywords]:
-    print("Sample from one classifier:", res[:2])  # <-- debug
-    for movie_id, score in res:
-        combined_scores[movie_id] = combined_scores.get(movie_id, 0) + score
+    # Run each model
+    results_embeddings = classify_embeddings(user_input, movie_embeddings)
+    results_sentiment = classify_sentiment(user_input, emotion_vectors)
+    results_keywords = classify_keywords(
+        user_input, movies_df, usecols=["Title", "Description"]
+    )
 
-top_movies = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[:10]
+    # Combine scores
+    combined_scores = {}
+    for res in [results_embeddings, results_sentiment, results_keywords]:
+        for movie_id, score in res:
+            combined_scores[movie_id] = combined_scores.get(movie_id, 0) + score
 
-# debug prints
-print(
-    "Sample from results_embeddings:",
-    [(movies_df.iloc[movie_id]["Title"], score) for movie_id, score in results_embeddings[:10]],
-)
+    # Sort and pick top 10
+    top_movies = sorted(
+        combined_scores.items(), key=lambda x: x[1], reverse=True
+    )[:10]
 
-print(
-    "Sample from results_sentiment:",
-    [(movies_df.iloc[movie_id]["Title"], score) for movie_id, score in results_sentiment[:10]],
-)
-print(
-    "Sample from results_keywords:",
-    [(movies_df.iloc[movie_id]["Title"], score) for movie_id, score in results_keywords[:10]],
-)
-print("number of unique movies in combined_scores:", len(combined_scores))
+    # Format the results nicely for Flask
+    formatted = []
+    for movie_id, score in top_movies:
+        movie = movies_df.iloc[movie_id]
+        formatted.append({
+            "title": movie["Title"],
+            "description": movie["Description"],
+            "score": float(score),
+        })
 
-print("\nTop recommendations:")
-for movie_id, score in top_movies:
-    movie = movies_df.iloc[movie_id]  # index-based lookup
-    print(f"{movie['Title']} - {movie['Description']} (Score: {score:.2f})")
-    print("---------------------------------------------------")
+    return formatted
