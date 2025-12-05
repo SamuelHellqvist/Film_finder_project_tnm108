@@ -17,6 +17,15 @@ def classify(user_input: str, movie_embeddings: np.ndarray):
     # 2. Compute cosine similarity
     similarities = cosine_similarity(user_embedding, movie_embeddings)[0]  # (num_movies,)
 
+    # Normalize similarities to [0, 1]
+    min_s = similarities.min()
+    max_s = similarities.max()
+
+    if max_s > min_s:
+        similarities = (similarities - min_s) / (max_s - min_s)
+    else:
+        similarities = np.ones_like(similarities)
+
     # 3. Top 10 indices
     top_indices = np.argsort(similarities)[-10:][::-1]
 

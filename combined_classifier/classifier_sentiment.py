@@ -21,6 +21,17 @@ def classify(user_input: str, movie_emotion_vectors: np.ndarray):
     user_emotion = probs.numpy().reshape(1, -1)  # (1, 7)
 
     similarities = cosine_similarity(user_emotion, movie_emotion_vectors)[0]  # (num_movies,)
+    #top_indices = np.argsort(similarities)[-10:][::-1]
+
+    min_s = similarities.min()
+    max_s = similarities.max()
+    if max_s > min_s:
+        similarities = (similarities - min_s) / (max_s - min_s)
+    else:
+        similarities = np.ones_like(similarities)
+
+    # Get top 10 based on normalized similarity
     top_indices = np.argsort(similarities)[-10:][::-1]
+
 
     return [(int(idx), float(similarities[idx])) for idx in top_indices]

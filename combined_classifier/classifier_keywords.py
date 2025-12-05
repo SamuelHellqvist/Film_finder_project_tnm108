@@ -20,6 +20,14 @@ def classify(user_input: str, movies_df: pd.DataFrame, usecols=None):
     input_tfidf = tfidf_vectorizer.transform([user_input])
 
     similarities = cosine_similarity(input_tfidf, keyword_matrix)[0]
+    # Normalize similarities to [0, 1]
+    min_s = similarities.min()
+    max_s = similarities.max()
+    if max_s > min_s:
+        similarities = (similarities - min_s) / (max_s - min_s)
+    else:
+        similarities = np.ones_like(similarities)
+        
     top_indices = similarities.argsort()[-10:][::-1]
 
     # IMPORTANT: use DataFrame index as ID

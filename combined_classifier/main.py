@@ -26,11 +26,20 @@ for res in [results_embeddings, results_sentiment, results_keywords]:
 top_movies = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[:10]
 
 # debug prints
-print("len(results_embeddings):", len(results_embeddings))
-print("len(results_sentiment):", len(results_sentiment))
-print("len(results_keywords):", len(results_keywords))
-print("number of unique movies in combined_scores:", len(combined_scores))
+print(
+    "Sample from results_embeddings:",
+    [(movies_df.iloc[movie_id]["Title"], score) for movie_id, score in results_embeddings[:10]],
+)
 
+print(
+    "Sample from results_sentiment:",
+    [(movies_df.iloc[movie_id]["Title"], score) for movie_id, score in results_sentiment[:10]],
+)
+print(
+    "Sample from results_keywords:",
+    [(movies_df.iloc[movie_id]["Title"], score) for movie_id, score in results_keywords[:10]],
+)
+print("number of unique movies in combined_scores:", len(combined_scores))
 
 print("\nTop recommendations:")
 for movie_id, score in top_movies:
