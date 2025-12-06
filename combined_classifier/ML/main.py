@@ -11,7 +11,7 @@ movie_embeddings = np.load("test_data/movie_embeddings.npy")
 emotion_vectors = np.load("test_data/emotion_vectors.npy")  # must be (num_movies, 7)
 
 #user_input = input("Describe the movie you want: ")
-#GET IT FROM FLASK INSTEAD
+#GET IT FROM FLASK INSTEAD...
 
 def run_classifier(user_input):
     """Return the top 10 movie recommendations for a given text."""
@@ -34,14 +34,30 @@ def run_classifier(user_input):
         combined_scores.items(), key=lambda x: x[1], reverse=True
     )[:10]
 
-    # Format the results nicely for Flask
+     # Sort ALL movies by combined score (best first)
+    sorted_movies = sorted(
+        combined_scores.items(), key=lambda x: x[1], reverse=True
+    )
+
+    # Now pick up to 10 movies with UNIQUE titles
     formatted = []
-    for movie_id, score in top_movies:
+    seen_titles = set()
+
+    for movie_id, score in sorted_movies:
         movie = movies_df.iloc[movie_id]
+        title = movie["Title"]
+
+        if title in seen_titles:
+            continue  # skip duplicate title
+
+        seen_titles.add(title)
         formatted.append({
-            "title": movie["Title"],
+            "title": title,
             "description": movie["Description"],
             "score": float(score),
         })
+
+        if len(formatted) == 10:
+            break  # we have our top 10 unique movies
 
     return formatted
