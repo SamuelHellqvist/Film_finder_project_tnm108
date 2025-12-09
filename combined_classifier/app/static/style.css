@@ -39,6 +39,7 @@ form input{
   width: 50%;
   height: 3rem;
   padding: 1rem;
+  font-size: 1.5rem;
 }
 
 form button{
@@ -82,6 +83,9 @@ ol li::marker {
 }
 
 .homebtn{
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
   background-color: var(--color-periwinkle);
   color: var(--color-persian-indigo);
   padding: 1rem;
