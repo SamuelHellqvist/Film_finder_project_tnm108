@@ -13,8 +13,13 @@ emotion_vectors = np.load("test_data/emotion_vectors.npy")  # must be (num_movie
 #user_input = input("Describe the movie you want: ")
 #GET IT FROM FLASK INSTEAD...
 
-def run_classifier(user_input):
-    """Return the top 10 movie recommendations for a given text."""
+def run_classifier(
+    user_input,
+    w_emb: float = 1.0,  # Weight for embeddings
+    w_sent: float = 1.0, # Weight for sentiment
+    w_key: float = 1.0   # Weight for keywords
+):
+    """Return the top 10 movie recommendations for a given text using weighted scores."""
 
     # Run each model
     results_embeddings = classify_embeddings(user_input, movie_embeddings)
@@ -23,18 +28,21 @@ def run_classifier(user_input):
         user_input, movies_df, usecols=["Title", "Description"]
     )
 
-    # Combine scores
+    # Combine scores using the dictionary approach for readability
     combined_scores = {}
-    for res in [results_embeddings, results_sentiment, results_keywords]:
-        for movie_id, score in res:
-            combined_scores[movie_id] = combined_scores.get(movie_id, 0) + score
 
-    # Sort and pick top 10
-    top_movies = sorted(
-        combined_scores.items(), key=lambda x: x[1], reverse=True
-    )[:10]
+    # Store results and weights in parallel lists for clean iteration
+    results_list = [results_embeddings, results_sentiment, results_keywords]
+    weights_list = [w_emb, w_sent, w_key]
 
-     # Sort ALL movies by combined score (best first)
+    # --- THE ONLY CHANGED LOOP ---
+    for results, weight in zip(results_list, weights_list):
+        for movie_id, score in results:
+            # Apply the weight directly before adding to the total score
+            combined_scores[movie_id] = combined_scores.get(movie_id, 0) + (score * weight)
+    # -----------------------------
+
+    # Sort ALL movies by combined score (best first)
     sorted_movies = sorted(
         combined_scores.items(), key=lambda x: x[1], reverse=True
     )
