@@ -45,3 +45,25 @@ form button{
   margin-top: 1rem;
   font-weight: bold;
 }
+
+ol strong{
+  font-family: sans-serif;
+}
+ol.big-numbers {
+  font-size: 16px; /* regular list text */
+}
+
+ol li::marker {
+  font-size: 1.5rem;      /* make the numbers larger */
+  font-weight: bold;    /* optional */
+}
+
+
+.break::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #000;
+  margin: 40px 0;
+}
