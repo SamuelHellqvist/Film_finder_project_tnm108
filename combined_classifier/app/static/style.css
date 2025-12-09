@@ -35,15 +35,28 @@ form{
 }
 
 form input{
+  border-radius: 0.5rem;
   width: 50%;
   height: 3rem;
+  padding: 1rem;
 }
 
 form button{
   background-color: var(--color-periwinkle);
-  font-size: 1rem;
+  font-size: 2rem;
   margin-top: 1rem;
   font-weight: bold;
+  border-radius: 0.5rem;
+}
+
+form button:hover{
+  /* background-color: var(--color-cornflower-blue); */
+  cursor: pointer;
+}
+
+form button:active{
+  color: red;
+  background-color: var(--color-cornflower-blue);
 }
 
 ol strong{
@@ -66,4 +79,13 @@ ol li::marker {
   height: 2px;
   background: #000;
   margin: 40px 0;
+}
+
+.homebtn{
+  background-color: var(--color-periwinkle);
+  color: var(--color-persian-indigo);
+  padding: 1rem;
+  margin: 1rem;
+  width: fit-content;
+  border-radius: 0.7rem;
 }
