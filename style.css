@@ -1,0 +1,113 @@
+:root {
+    --color-persian-indigo: #27187E;
+    --color-cornflower-blue: #758BFD;
+    --color-periwinkle: #AEB8FE;
+    --color-anti-flash-white: #F1F2F6;
+    --color-ut-orange: #FF8600;
+}
+/* TOP INFO BAR */
+.top-info-bar {
+    width: 100%;
+    background: #bcb9c9;     /* soft lilac */
+       
+    color: var(--color-anti-flash-white);
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+body, .top-info-bar {
+    font-family: 'Inter', sans-serif;
+}
+
+/* GENERAL LAYOUT */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-anti-flash-white);
+    color: var(--color-persian-indigo);
+    font-family: sans-serif;
+    line-height: 1.6;
+}
+
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* HEADER */
+header {
+    max-width: 800px;
+    margin: 50px auto 20px auto;
+    text-align: left;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--color-persian-indigo);
+}
+
+.subtitle {
+    font-size: 1rem;
+    margin-top: 0;
+    color: var(--color-cornflower-blue);
+}
+
+/* SECTION HEADERS */
+h2 {
+    font-size: 1.9rem;
+    margin-bottom: 10px;
+    margin-top: 50px;
+    color: var(--color-persian-indigo);
+}
+
+/* GRADIENT BAR USING YOUR PALETTE */
+.gradient-line {
+    width: 100%;
+    height: 8px;
+    margin: 10px 0 25px 0;
+    border-radius: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--color-persian-indigo),
+        var(--color-cornflower-blue),
+        var(--color-periwinkle),
+        var(--color-ut-orange)
+    );
+}
+
+/* TEXT */
+p {
+    font-size: 1.05rem;
+    opacity: 0.95;
+    color: var(--color-persian-indigo);
+}
+
+.movie-bg {
+    filter: blur(8px) saturate(30%) brightness(0.9);
+    opacity: 0.35;
+}
+.side-image {
+    position: fixed;
+    top: 0;
+    width: 230px;
+    height: 100vh;
+    background: url("movies.jpg") no-repeat center/cover;
+    z-index: -1;
+    filter: blur(8px) saturate(30%) brightness(0.9);
+    opacity: 0.8;
+}
+
+.left-side {
+    left: 0;
+}
+
+.right-side {
+    right: 0;
+}
+
