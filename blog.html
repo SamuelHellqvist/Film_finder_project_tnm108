@@ -45,6 +45,33 @@
                 For example, scraped from a social media platform or taken from a public dataset.
                 Describe how many rows and columns you have, which time period the data covers,
                 and mention any important variables.
+                <br>
+                A challenge for every ML-learning implementation is data. If the model has lacking 
+                or simply not enough data, the performance will be weakened. There is a couple of 
+                ways that engineers deal with the problem of having to little data, like for example
+                 creating synthetic data and training ones model on “made-up” data points. 
+                 In the case of this project however, this is not an option since we want to 
+                 find real movies to recommend a potential viewer. The data also needs to fit the 
+                 models implementation. For example, if the model is made to recognize movie 
+                 reviews, the dataset can’t contain movie synopses (and vice versa). 
+                 The idea of this project was that the user can insert a descriptive text about 
+                 the movie, and then get movies recommended that fit that description. So a 
+                 fitting data collection is a set of movie descriptions. When choosing what 
+                 to use as the base dataset for the project, a bunch of different datasets where 
+                 compared and looked at. The project group wanted a dataset that:
+                <ol>
+                    <li>Contains movie titles and descriptions</li>
+                    <li>Is fairly up-to-date</li>
+                    <li>Can be implemented in the model</li>
+                    <li>Preferably have a lot of data</li>
+                </ol>
+
+                <br>
+                The dataset that ended up as the base for the project is a dataset that contains titles, genres, descriptions and other information from IMDB (länk här). The dataset contains over 16 000 movies and are available though Kaggle (Länk här). 
+                <br>
+                <br>
+                With this dataset, a description of a movie could easily be connected to the movies title via indexing which fit the project perfectly. Keywords, sentiment and embeddings could be created from the descriptions. The set contains many movies, which hopefully will give the project higher accuracy and are updated all the way to 2024. 
+
             </p>
         </section>
 
@@ -79,6 +106,12 @@
                 Mention metrics such as accuracy, precision, recall, F1 score, RMSE or similar,
                 and describe what the numbers mean in your context.
                 If you compared several models, state which one worked best.
+                <br>
+                Evaluating ones model is a important part of development of ai tools. In the case of this project, where there is three separate classifiers, three weights were used. These weights could me set manually to create another mix of the classifiers. The bigger the weight, the more it that classifier affects the end result. To test out what set of weights give the best results, a grid search was used. Grid search is used as a technique to test hyperparameters for a model in a fast way källa: https://h2o.ai/wiki/grid-search/. The project group decided to gather user inputs by asking some members of a film club (www.stubinen.org) to write a description of their favorite movie. The description contained one free form text and one set of keywords. This data was previously unseen by any models used and not connected to the dataset.
+                <br>
+                <br>
+                To perform hyperparameter optimization the description written by the test-persons were used in a scripts that looped over different combinations of parameters for the three different classifiers. It was found that …
+
             </p>
         </section>
 
