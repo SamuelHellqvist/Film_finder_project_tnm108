@@ -57,6 +57,33 @@
                 Mention steps such as handling missing values, removing duplicates,
                 selecting useful columns, normalizing values or creating new features.
             </p>
+            <p> The data processing stage focused on preparing the movie dataset for reliable similarity-based recommendation. Since the system relies on multiple natural language processing techniques, consistent and well-structured data was required to ensure that all models could operate on the same underlying information.</p>
+            <h3>Data cleaning</h3>
+            <p>The dataset was inspected for missing or empty values in the description field. 
+                A filtering step was applied to remove such entries, as textual content is required by all similarity models used in the system. This validation confirmed that no rows contained missing or empty descriptions, indicating that the dataset was already clean and suitable for further processing.</p>
+            <p>Here’s the data cleaning step we used:</p>
+            <img src="screenshot1.png" alt="Screenshot of data cleaning step" class="screenshot_image" />
+            <p>While the dataset itself was not deduplicated during preprocessing, duplicate movie title were handled at the output stage to imporve the clarity of recommendations presented to the user. </p>
+            <h3>Feature Engineering</h3>
+            <p>
+After validating the dataset, the description column was selected as the primary input for all models. Other attributes were not used during feature extraction or similarity computation.            </p>
+
+            <p>
+            To enable machine learning models to operate on textual data, the movie descriptions were transformed into numerical representations using multiple feature engineering techniques. Semantic sentence embeddings and emotion probability distributions were used to 
+            represent each movie description in numerical form, capturing both contextual meaning and emotional characteristics of the text. 
+            In addition, TF-IDF representations were generated at runtime to capture keyword based relevance. Together, these representations allow the system to analyze the same text from different perspectives and combine the strengths of several models.
+            
+           </p>
+
+           <!-- looking at the dimensions and rows numbers  -->
+           <p>After feature engineering, consistency between the movie dataset and all numerical feature representations was verified by confirming matching dimensions. This ensured that similarity computations were applied to correctly aligned data.</p>
+
+            <h3>Data alignment </h3>
+            <p>
+                To ensure </p>
+
+            <p> Duplicate movie titles were not removed during the data processing stage. Multiple entries with the same title can represent valid candidates during similarity computation and model evaluation. Instead, duplicate titles were handled at the output stage, where only the final ranked list presented to the user was deduplicated. This design choice preserves all candidate information during processing while improving clarity in the final recommendations. </p>
+
         </section>
 
         <!-- Modeling -->
@@ -91,6 +118,21 @@
                 Give a direct answer to the research question, mention limitations
                 and, if relevant, suggest ideas for future work or improvements.
             </p>
+        </section>
+
+        <section id="references">
+            <h2>References</h2>
+            <div class="gradient-line"></div>
+            <p>
+                List any sources you used, such as articles, datasets,
+                libraries or code snippets from the internet.
+            </p>
+            <ol>
+                <li>Feature Extraction : <a href="https://scikit-learn.org/stable/modules/feature_extraction.html" target="_blank" rel="noopener">  https://scikit-learn.org/stable/modules/feature_extraction.html</a></li>
+                <li>TF-IDF Vectorizer : <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html" target="_blank" rel="noopener"> https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html</a></li>
+                <li>Sentence Transformers : <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2" target="_blank" rel="noopener"> https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2</a></li>
+                <li>Emotion Detection : <a href="https://huggingface.co/j-hartmann/emotion-english-distilroberta-base" target="_blank" rel="noopener"> https://huggingface.co/j-hartmann/emotion-english-distilroberta-base</a></li>
+            </ol>
         </section>
 
     </main>
