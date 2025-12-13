@@ -80,7 +80,7 @@ def optimize_weights_grid_search(top_n=3):
     """
     
     # Define the search space for weights (e.g., from 0.0 to 2.0 in steps of 0.5)
-    weight_options = np.arange(0.0, 1.1, 0.1)
+    weight_options = np.arange(0.0, 2, 0.5)
     
     # Initialize optimization variables
     best_mrr = -1.0
@@ -115,7 +115,7 @@ def optimize_weights_grid_search(top_n=3):
         # print(f"Weights ({w_emb}, {w_sent}, {w_key}): MRR = {current_mrr:.4f}")
 
     print("\n===========================================")
-    print("✨ OPTIMAL ENSEMBLE FOUND VIA GRID SEARCH ✨")
+    print("OPTIMAL ENSEMBLE FOUND VIA GRID SEARCH)")
     print("===========================================")
     print(f"Optimal Weights: {best_weights}")
     print(f"Best MRR (Top {top_n}): {best_mrr:.4f}")
