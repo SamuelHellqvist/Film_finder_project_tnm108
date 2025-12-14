@@ -4,3 +4,4 @@ data/
 __pycache__/
 __pycache__/2
 __pycache__/3
+.DS_Store
