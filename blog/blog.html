@@ -170,12 +170,7 @@
         <section id="modeling">
             <h2>Modeling </h2>
             <div class="gradient-line"></div>
-            <p><i>
-                    Present the model or models you used.
-                    For example, regression, classification, clustering or a simple baseline model.
-                    Briefly explain why this model fits the research question and which input features it uses.
-                </i></p>
-
+           
             <p>
                 After data processing and feature engineering, the recommendation system applies multiple models to
                 compare the user’s input with the movie dataset. Each model focuses on a different aspect of similarity:
@@ -190,8 +185,10 @@
                 user’s input with the precomputed semantic embeddings of all movie descriptions. Both the user input and
                 the movie descriptions were represented using the same sentence embedding model. This ensures that the
                 similarity scores reflect how closely the meanings of the texts align, even when different wording is
-                used. [3]
-                <br>
+                used [3].
+            </p>
+            <p>
+
                 This model is particularly effective for capturing contextual similarity and paraphrased expressions,
                 where exact keyword overlap may be limited.
             </p>
@@ -202,8 +199,10 @@
                 For emotion based modeling, cosine similarity was applied to compare the emotion probability
                 distribution of the user’s input with the precomputed emotion probability distributions of the movies.
                 Each vector represents the likelihood of seven emotion categories, allowing the system to match movies
-                based on emotional tone rather than content alone. [4]
-                <br>
+                based on emotional tone rather than content alone [4].
+            </p>
+
+            <p>
                 Movies with similar emotional profiles to the user’s input will receive higher similarity scores,
                 enabling recommendations that align with the desired mood or sentiment.
             </p>
@@ -213,8 +212,9 @@
                 For keyword based modeling, cosine similarity was used to compare the TF-IDF representation of the
                 user’s input with the TF-IDF matrix of movie descriptions. TF-IDF emphasizes important terms while
                 reducing the influence of common words, making this model effective when the user includes specific
-                keywords, themes, or genres in the input text. [2]
-                <br>
+                keywords, themes, or genres in the input text [2].
+            </p>
+            <p>
                 This model complements the semantic and emotion based models by focusing on explicit term overlap.
             </p>
 
