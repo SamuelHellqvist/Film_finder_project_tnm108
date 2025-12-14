@@ -22,14 +22,36 @@
             <div class="date">December 2025</div>
         </div>
 
-        <h1>Film Finder </h1>
+        <h1>Film Finder</h1>
         <p class="subtitle">
-            Blog post describing the full workflow from research question to conclusion
+            A machine learning based approach to movie recommendation using semantic, emotional, and keyword similarity
         </p>
         <div class="gradient-line"></div>
     </header>
 
     <main>
+        <section id="system-overview">
+            <h2>Application overview</h2>
+            <div class="gradient-line"></div>
+
+            <p>
+                The Film Finder application is implemented as a web based system using Flask as the backend framework.
+                The application allows users to enter a free text description of a movie they would like to watch and
+                returns a list of recommended movies based on content similarity.
+            </p>
+
+            <p>
+                The application workflow follows a standard request response pattern:
+            </p>
+
+            <ul>
+                <li>The user enters text in the web interface.</li>
+                <li>The text is submitted from the HTML form to a Flask route.</li>
+                <li>The Flask route forwards the input text to the machine learning pipeline.</li>
+                <li>The machine learning models compute similarity scores and generate ranked results.</li>
+                <li>Flask renders a response page displaying the recommended movies.</li>
+            </ul>
+        </section>
 
         <!-- Research question -->
         <section id="research-question">
@@ -170,7 +192,8 @@
         <section id="modeling">
             <h2>Modeling </h2>
             <div class="gradient-line"></div>
-           
+
+
             <p>
                 After data processing and feature engineering, the recommendation system applies multiple models to
                 compare the user’s input with the movie dataset. Each model focuses on a different aspect of similarity:
