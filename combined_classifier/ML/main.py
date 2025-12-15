@@ -1,20 +1,14 @@
 import pandas as pd
 import numpy as np
-
 from .classifier_embeddings import classify as classify_embeddings
 from .classifier_sentiment import classify as classify_sentiment
 from .classifier_keywords import classify as classify_keywords
 
-
-
+# Load movie data from CSV
 movies_df = pd.read_csv("test_data/16k_Movies.csv")
+#movies_df = pd.read_csv("test_data/16k_Movies.csv")
 movie_embeddings = np.load("test_data/movie_embeddings.npy")
 emotion_vectors = np.load("test_data/emotion_vectors.npy")  # must be (num_movies, 7)
-
-print("movies_df rows:", len(movies_df))
-print("movie_embeddings rows:", movie_embeddings.shape[0])
-print("emotion_vectors rows:", emotion_vectors.shape[0])
-
 
 #user_input = input("Describe the movie you want: ")
 #GET IT FROM FLASK INSTEAD...

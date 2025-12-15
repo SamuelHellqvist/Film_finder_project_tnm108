@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,22 +9,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
 
     <header>
         <div class="top-info-bar">
-            <span> <b>Machine Learning for Social Media  TNM108. Film Finder Project </b> <br> <i>Samuel Hellqvist (samhe463) & Deema Abo Gheda (deeso509) </i></span>
-           
+            <div class="course">TNM108 · Machine Learning for Social Media</div>
+            <div class="project">Film Finder Project</div>
+            <div class="meta">
+                Samuel Hellqvist (samhe463) · Deema Abo Gheda (deeso509)
+            </div>
+            <div class="date">December 2025</div>
         </div>
 
-        <h1>Film Finder. A Data Science Mini Project</h1>
+        <h1>Film Finder</h1>
         <p class="subtitle">
-            Blog post describing the full workflow from research question to conclusion
+            A machine learning based approach to movie recommendation using semantic, emotional, and keyword similarity
         </p>
         <div class="gradient-line"></div>
     </header>
 
     <main>
+        <section id="system-overview">
+            <h2>Application overview</h2>
+            <div class="gradient-line"></div>
+
+            <p>
+                The Film Finder application is implemented as a web based system using Flask as the backend framework.
+                The application allows users to enter a free text description of a movie they would like to watch and
+                returns a list of recommended movies based on content similarity.
+            </p>
+
+            <p>
+                The application workflow follows a standard request response pattern:
+            </p>
+
+            <ul>
+                <li>The user enters text in the web interface.</li>
+                <li>The text is submitted from the HTML form to a Flask route.</li>
+                <li>The Flask route forwards the input text to the machine learning pipeline.</li>
+                <li>The machine learning models compute similarity scores and generate ranked results.</li>
+                <li>Flask renders a response page displaying the recommended movies.</li>
+            </ul>
+        </section>
 
         <!-- Research question -->
         <section id="research-question">
@@ -46,81 +74,179 @@
                 Describe how many rows and columns you have, which time period the data covers,
                 and mention any important variables.
                 <br>
-                A challenge for every ML-learning implementation is data. If the model has lacking 
-                or simply not enough data, the performance will be weakened. There is a couple of 
+                A challenge for every ML-learning implementation is data. If the model has lacking
+                or simply not enough data, the performance will be weakened. There is a couple of
                 ways that engineers deal with the problem of having to little data, like for example
-                 creating synthetic data and training ones model on “made-up” data points. 
-                 In the case of this project however, this is not an option since we want to 
-                 find real movies to recommend a potential viewer. The data also needs to fit the 
-                 models implementation. For example, if the model is made to recognize movie 
-                 reviews, the dataset can’t contain movie synopses (and vice versa). 
-                 The idea of this project was that the user can insert a descriptive text about 
-                 the movie, and then get movies recommended that fit that description. So a 
-                 fitting data collection is a set of movie descriptions. When choosing what 
-                 to use as the base dataset for the project, a bunch of different datasets where 
-                 compared and looked at. The project group wanted a dataset that:
-                <ol>
-                    <li>Contains movie titles and descriptions</li>
-                    <li>Is fairly up-to-date</li>
-                    <li>Can be implemented in the model</li>
-                    <li>Preferably have a lot of data</li>
-                </ol>
+                creating synthetic data and training ones model on “made-up” data points.
+                In the case of this project however, this is not an option since we want to
+                find real movies to recommend a potential viewer. The data also needs to fit the
+                models implementation. For example, if the model is made to recognize movie
+                reviews, the dataset can’t contain movie synopses (and vice versa).
+                The idea of this project was that the user can insert a descriptive text about
+                the movie, and then get movies recommended that fit that description. So a
+                fitting data collection is a set of movie descriptions. When choosing what
+                to use as the base dataset for the project, a bunch of different datasets where
+                compared and looked at. The project group wanted a dataset that:
+            <ol>
+                <li>Contains movie titles and descriptions</li>
+                <li>Is fairly up-to-date</li>
+                <li>Can be implemented in the model</li>
+                <li>Preferably have a lot of data</li>
+            </ol>
 
-                <br>
-                The dataset that ended up as the base for the project is a dataset that contains titles, genres, descriptions and other information from IMDB (länk här). The dataset contains over 16 000 movies and are available though Kaggle (Länk här). 
-                <br>
-                <br>
-                With this dataset, a description of a movie could easily be connected to the movies title via indexing which fit the project perfectly. Keywords, sentiment and embeddings could be created from the descriptions. The set contains many movies, which hopefully will give the project higher accuracy and are updated all the way to 2024. 
+            <br>
+            The dataset that ended up as the base for the project is a dataset that contains titles, genres,
+            descriptions and other information from IMDB (länk här). The dataset contains over 16 000 movies and are
+            available though Kaggle (Länk här).
+            <br>
+            <br>
+            With this dataset, a description of a movie could easily be connected to the movies title via indexing which
+            fit the project perfectly. Keywords, sentiment and embeddings could be created from the descriptions. The
+            set contains many movies, which hopefully will give the project higher accuracy and are updated all the way
+            to 2024.
 
             </p>
         </section>
 
         <!-- Data processing -->
         <section id="data-processing">
-            <h2>Data processing (Deema)</h2>
+            <h2>Data processing </h2>
             <div class="gradient-line"></div>
             <p>
-                Describe how the raw data was cleaned and transformed.
-                Mention steps such as handling missing values, removing duplicates,
-                selecting useful columns, normalizing values or creating new features.
+                The data processing stage focused on preparing the movie dataset so that it could be used consistently
+                by all models in the recommendation system. The same processing pipeline was applied to all movies,
+                following a fixed sequence of steps: data validation, feature selection, and feature engineering.
+                This ensured that all models operated on the same input data and that their outputs could be safely
+                compared and combined.
             </p>
-            <p> The data processing stage focused on preparing the movie dataset for reliable similarity-based recommendation. Since the system relies on multiple natural language processing techniques, consistent and well-structured data was required to ensure that all models could operate on the same underlying information.</p>
-            <h3>Data cleaning</h3>
-            <p>The dataset was inspected for missing or empty values in the description field. 
-                A filtering step was applied to remove such entries, as textual content is required by all similarity models used in the system. This validation confirmed that no rows contained missing or empty descriptions, indicating that the dataset was already clean and suitable for further processing.</p>
+
+            <h3>Data cleaning & validation</h3>
+
+            <p>
+                The first step was to validate the dataset. The description field was inspected for missing or empty
+                values, since all models rely on textual input. A filtering step was applied to remove such entries.
+                This validation confirmed that no movies contained missing or empty descriptions, indicating that the
+                dataset was already clean and suitable for further processing.
+            </p>
+
             <p>Here’s the data cleaning step we used:</p>
             <img src="screenshot1.png" alt="Screenshot of data cleaning step" class="screenshot_image" />
-            <p>While the dataset itself was not deduplicated during preprocessing, duplicate movie title were handled at the output stage to imporve the clarity of recommendations presented to the user. </p>
+            <p>While the dataset itself was not deduplicated during preprocessing, duplicate movie titles were handled
+                at
+                the output stage to improve the clarity of recommendations presented to the user. </p>
+
+            <h3>Feature Selection</h3>
+            <p>After validating the dataset, the description column was selected as the primary input for all models.
+                Other attributes were not used during feature extraction or similarity computation. This ensured a
+                consistent input source across all methods and reduced unnecessary complexity.</p>
+
             <h3>Feature Engineering</h3>
             <p>
-After validating the dataset, the description column was selected as the primary input for all models. Other attributes were not used during feature extraction or similarity computation.            </p>
+                To enable machine learning models to operate on textual data, the movie descriptions were transformed
+                into numerical representations using multiple feature engineering techniques [1].
+            </p>
 
+            <!-- semantic classifier -->
             <p>
-            To enable machine learning models to operate on textual data, the movie descriptions were transformed into numerical representations using multiple feature engineering techniques. Semantic sentence embeddings and emotion probability distributions were used to 
-            represent each movie description in numerical form, capturing both contextual meaning and emotional characteristics of the text. 
-            In addition, TF-IDF representations were generated at runtime to capture keyword based relevance. Together, these representations allow the system to analyze the same text from different perspectives and combine the strengths of several models.
-            
-           </p>
+                For semantic processing, movie descriptions were represented using precomputed semantic sentence
+                embeddings. At runtime, the user’s input was embedded using the same model to produce a comparable
+                numerical representation. This allows movies with similar meaning to be matched even when different
+                wording is used [3].
+                <img src="screenshot2.png" alt="Screenshot of embedding generation step" class="screenshot_image" />
+            </p>
 
-           <!-- looking at the dimensions and rows numbers  -->
-           <p>After feature engineering, consistency between the movie dataset and all numerical feature representations was verified by confirming matching dimensions. This ensured that similarity computations were applied to correctly aligned data.</p>
-
-            <h3>Data alignment </h3>
+            <!-- emotion classifier -->
             <p>
-                To ensure </p>
+                For emotion based processing, each movie description was associated with an emotion probability
+                distribution across seven categories: anger, disgust, fear, joy, neutral, sadness, and surprise. These
+                emotion representations were generated in a separate preprocessing step and stored for later use.
+                At runtime, the user’s input text was processed using the same emotion classification model to generate
+                a corresponding emotion probability distribution. This representation captures the emotional
+                characteristics of the input text and enables comparison with the emotional profiles of movie
+                descriptions [4].
+                <img src="screenshot3.png" alt="Screenshot of emotion vector generation step"
+                    class="screenshot_image" />
+            </p>
 
-            <p> Duplicate movie titles were not removed during the data processing stage. Multiple entries with the same title can represent valid candidates during similarity computation and model evaluation. Instead, duplicate titles were handled at the output stage, where only the final ranked list presented to the user was deduplicated. This design choice preserves all candidate information during processing while improving clarity in the final recommendations. </p>
+            <!-- TF-IDF classifier -->
+            <p>
+                For keyword based processing, TF-IDF (Term Frequency–Inverse Document Frequency) representations were
+                generated at runtime from the movie descriptions. The TF-IDF vectorizer was fitted on the full set of
+                movie descriptions to learn the vocabulary and corresponding term weights.
+                When the user provided input text, it was transformed into a TF-IDF vector using the same fitted
+                vectorizer. This representation highlights important keywords and terms that can later be used to
+                compare the user input with movie descriptions [2].
+                <br>
+                <img src="screenshot4.png" alt="Screenshot of TF-IDF vectorization step" class="screenshot_image" />
+            </p>
+            <p>
+                By using these three representations, each movie description could be analyzed from multiple
+                perspectives: semantic meaning, emotional tone, and keyword relevance.
+                This multi-faceted feature engineering approach enabled the recommendation system to capture different
+                aspects of similarity between the user’s input and the movie dataset.
+            </p>
 
         </section>
 
         <!-- Modeling -->
         <section id="modeling">
-            <h2>Modeling (Deema)</h2>
+            <h2>Modeling </h2>
             <div class="gradient-line"></div>
+
+
             <p>
-                Present the model or models you used.
-                For example, regression, classification, clustering or a simple baseline model.
-                Briefly explain why this model fits the research question and which input features it uses.
+                After data processing and feature engineering, the recommendation system applies multiple models to
+                compare the user’s input with the movie dataset. Each model focuses on a different aspect of similarity:
+                semantic meaning, emotional tone, and keyword overlap. By using several models in parallel, the system
+                can capture complementary information from the data.
+            </p>
+
+
+            <h3>Semantic similarity model </h3>
+            <p>
+                For semantic modeling, cosine similarity was used to compare the semantic sentence embedding of the
+                user’s input with the precomputed semantic embeddings of all movie descriptions. Both the user input and
+                the movie descriptions were represented using the same sentence embedding model. This ensures that the
+                similarity scores reflect how closely the meanings of the texts align, even when different wording is
+                used [3].
+            </p>
+            <p>
+
+                This model is particularly effective for capturing contextual similarity and paraphrased expressions,
+                where exact keyword overlap may be limited.
+            </p>
+
+
+            <h3>Emotion similarity model </h3>
+            <p>
+                For emotion based modeling, cosine similarity was applied to compare the emotion probability
+                distribution of the user’s input with the precomputed emotion probability distributions of the movies.
+                Each vector represents the likelihood of seven emotion categories, allowing the system to match movies
+                based on emotional tone rather than content alone [4].
+            </p>
+
+            <p>
+                Movies with similar emotional profiles to the user’s input will receive higher similarity scores,
+                enabling recommendations that align with the desired mood or sentiment.
+            </p>
+
+            <h3>Keyword similarity model </h3>
+            <p>
+                For keyword based modeling, cosine similarity was used to compare the TF-IDF representation of the
+                user’s input with the TF-IDF matrix of movie descriptions. TF-IDF emphasizes important terms while
+                reducing the influence of common words, making this model effective when the user includes specific
+                keywords, themes, or genres in the input text [2].
+            </p>
+            <p>
+                This model complements the semantic and emotion based models by focusing on explicit term overlap.
+            </p>
+
+            <h3> Score normalization & ranking </h3>
+            <p>
+                Each model produces a similarity score for all movies. To ensure that scores from different models are
+                comparable, similarity values were normalized to a common range. The movies were then ranked based on
+                their similarity scores, and the top candidates from each model were selected for further combination in
+                the ensemble stage.
             </p>
         </section>
 
@@ -134,10 +260,20 @@ After validating the dataset, the description column was selected as the primary
                 and describe what the numbers mean in your context.
                 If you compared several models, state which one worked best.
                 <br>
-                Evaluating ones model is a important part of development of ai tools. In the case of this project, where there is three separate classifiers, three weights were used. These weights could me set manually to create another mix of the classifiers. The bigger the weight, the more it that classifier affects the end result. To test out what set of weights give the best results, a grid search was used. Grid search is used as a technique to test hyperparameters for a model in a fast way källa: https://h2o.ai/wiki/grid-search/. The project group decided to gather user inputs by asking some members of a film club (www.stubinen.org) to write a description of their favorite movie. The description contained one free form text and one set of keywords. This data was previously unseen by any models used and not connected to the dataset.
+                Evaluating ones model is a important part of development of ai tools. In the case of this project, where
+                there is three separate classifiers, three weights were used. These weights could me set manually to
+                create another mix of the classifiers. The bigger the weight, the more it that classifier affects the
+                end result. To test out what set of weights give the best results, a grid search was used. Grid search
+                is used as a technique to test hyperparameters for a model in a fast way källa:
+                https://h2o.ai/wiki/grid-search/. The project group decided to gather user inputs by asking some members
+                of a film club (www.stubinen.org) to write a description of their favorite movie. The description
+                contained one free form text and one set of keywords. This data was previously unseen by any models used
+                and not connected to the dataset.
                 <br>
                 <br>
-                To perform hyperparameter optimization the description written by the test-persons were used in a scripts that looped over different combinations of parameters for the three different classifiers. It was found that …
+                To perform hyperparameter optimization the description written by the test-persons were used in a
+                scripts that looped over different combinations of parameters for the three different classifiers. It
+                was found that …
 
             </p>
         </section>
@@ -156,21 +292,45 @@ After validating the dataset, the description column was selected as the primary
         <section id="references">
             <h2>References</h2>
             <div class="gradient-line"></div>
-            <p>
-                List any sources you used, such as articles, datasets,
-                libraries or code snippets from the internet.
-            </p>
             <ol>
-                <li>Feature Extraction : <a href="https://scikit-learn.org/stable/modules/feature_extraction.html" target="_blank" rel="noopener">  https://scikit-learn.org/stable/modules/feature_extraction.html</a></li>
-                <li>TF-IDF Vectorizer : <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html" target="_blank" rel="noopener"> https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html</a></li>
-                <li>Sentence Transformers : <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2" target="_blank" rel="noopener"> https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2</a></li>
-                <li>Emotion Detection : <a href="https://huggingface.co/j-hartmann/emotion-english-distilroberta-base" target="_blank" rel="noopener"> https://huggingface.co/j-hartmann/emotion-english-distilroberta-base</a></li>
+                <li>
+                    Scikit-learn developers. (2024).
+                    <i>Feature extraction.</i>
+                    Scikit-learn documentation.
+                    <a
+                        href="https://scikit-learn.org/stable/modules/feature_extraction.html">https://scikit-learn.org/stable/modules/feature_extraction.html</a>
+                </li>
+
+                <li>
+                    Scikit-learn developers. (2024).
+                    <i>TfidfVectorizer.</i>
+                    Scikit-learn documentation.
+                    <a
+                        href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html</a>
+                </li>
+
+                <li>
+                    Reimers, N., & Gurevych, I. (2019).
+                    <i>Sentence-BERT. Sentence embeddings using Siamese BERT-networks.</i>
+                    Hugging Face model card.
+                    <a
+                        href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2</a>
+                </li>
+
+                <li>
+                    Hartmann, J. (2022).
+                    <i>Emotion English DistilRoBERTa-base.</i>
+                    Hugging Face model card.
+                    <a
+                        href="https://huggingface.co/j-hartmann/emotion-english-distilroberta-base">https://huggingface.co/j-hartmann/emotion-english-distilroberta-base</a>
+                </li>
             </ol>
         </section>
 
     </main>
-<div class="side-image left-side"></div>
-<div class="side-image right-side"></div>
+    <div class="side-image left-side"></div>
+    <div class="side-image right-side"></div>
 
 </body>
+
 </html>
