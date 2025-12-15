@@ -80,7 +80,7 @@ def optimize_weights_grid_search(top_n=3):
     """
     
     # Define the search space for weights (e.g., from 0.0 to 2.0 in steps of 0.5)
-    weight_options = np.arange(0.0, 2, 0.5)
+    weight_options = np.arange(0.0, 1, 0.1)
     
     # Initialize optimization variables
     best_mrr = -1.0

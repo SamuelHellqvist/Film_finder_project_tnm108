@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
-from classifier_embeddings import classify as classify_embeddings
-from classifier_sentiment import classify as classify_sentiment
-from classifier_keywords import classify as classify_keywords
+
+from .classifier_embeddings import classify as classify_embeddings
+from .classifier_sentiment import classify as classify_sentiment
+from .classifier_keywords import classify as classify_keywords
 
 
 
-# #movies_df = pd.read_csv("test_data/16k_Movies.csv")
+movies_df = pd.read_csv("test_data/16k_Movies.csv")
 movie_embeddings = np.load("test_data/movie_embeddings.npy")
 emotion_vectors = np.load("test_data/emotion_vectors.npy")  # must be (num_movies, 7)
 
