@@ -100,21 +100,12 @@
                 When choosing what to use as the base dataset for the project, a bunch of different datasets where
                 compared
                 and looked at. The project group wanted a dataset that:
-<<<<<<< Updated upstream
                 <ul>
                     <li>Contains movie titles and descriptions/reviews</li>
                     <li>Is fairly up-to-date</li>
                     <li>Can be implemented in the model</li>
                     <li>Preferably have a lot of data</li>
                 </ul>
-=======
-            <ul>
-                <li>Contains movie titles and descriptions</li>
-                <li>Is fairly up-to-date</li>
-                <li>Can be implemented in the model</li>
-                <li>Preferably have a lot of data</li>
-            </ul>
->>>>>>> Stashed changes
 
             In the finished project, two different dataset were used. One was used for TF-IDF vector analysis.
             The dataset contained movie reviews and keyword extraction was used. The preprocessing and handling
@@ -305,7 +296,6 @@
                 and not connected to the dataset.
                 <br>
                 <br>
-<<<<<<< Updated upstream
                 To perform hyperparameter optimization the description written by the test-persons were used in a scripts that looped over different combinations of parameters for the three different classifiers.
 
                 A python scripts that looked at combinations of different weights were created by the project group. 
@@ -331,19 +321,6 @@
                 <br>
                 <h3>Conclusions from evaluation</h3>
                 It is clear to see that the sentiment analysis does not point the program in the right direction according to the evaluation and the two other classifiers seems to be equally important for a good result. To keep the nature of the <i>three part classifier</i> each classifier will be kept. The embeddings and the keyoword classifiers will get the same weight and the sentiment analysis classifier will get a smaller one. The way that we choose weights can be improved further, but as of right now the program uses 0.5 for embeddings and keywords and 0.25 for sentiment analysis. The grid search gave a result that internal testing from the project group showed to be not effective in some cases. 
-=======
-                To perform hyperparameter optimization the description written by the test-persons were used in a
-                scripts that looped over different combinations of parameters for the three different classifiers. It
-                was found that sentiment analysis was the classifier that a low weight for the sentiment analysis gave
-                the best result, and the other two classifiers was similarly accurate and would therefore get the same
-                weight.
-                We must not forget however that the test data used were descriptions of certain movies, and performance
-                was measured by checking if the program could pick out that particular movie from the dataset. The idea
-                of the program however is to recommend movies, and in that case sentiment analysis might be a good
-                aspect to have.
-
-
->>>>>>> Stashed changes
             </p>
         </section>
 
