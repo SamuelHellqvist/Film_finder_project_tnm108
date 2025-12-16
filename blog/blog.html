@@ -96,7 +96,7 @@
                 When choosing what to use as the base dataset for the project, a bunch of different datasets where compared 
                 and looked at. The project group wanted a dataset that:
                 <ul>
-                    <li>Contains movie titles and descriptions</li>
+                    <li>Contains movie titles and descriptions/reviews</li>
                     <li>Is fairly up-to-date</li>
                     <li>Can be implemented in the model</li>
                     <li>Preferably have a lot of data</li>
@@ -281,10 +281,28 @@
                 and not connected to the dataset.
                 <br>
                 <br>
-                To perform hyperparameter optimization the description written by the test-persons were used in a scripts that looped over different combinations of parameters for the three different classifiers. It was found that sentiment analysis was the classifier that a low weight for the sentiment analysis gave the best result, and the other two classifiers was similarly accurate and would therefore get the same weight. 
+                To perform hyperparameter optimization the description written by the test-persons were used in a scripts that looped over different combinations of parameters for the three different classifiers.
+
+                A python scripts that looked at combinations of different weights were created by the project group (sätt in bild här). The results found is displayed in the image bellow:
+                <br>
+                <br>
+                <img src="results.PNG" alt="Results from the evaluation">
+                <br>
+                <br>
+                It was found that a low weight (or actaully, no contribution) for the sentiment analysis gave the best result, and the other two classifiers was similarly accurate and would therefore get the same weight. 
+                The results shows that the model do have a hard time finding the movies that the users is looking for, since a accuracy of 0.4 is not particularly high. Other models, more or different data could be sollutions to this porblem. 
                 We must not forget however that the test data used were descriptions of certain movies, and performance was measured by checking if the program could pick out that particular movie from the dataset. The idea of the program however is to recommend movies, and in that case sentiment analysis might be a good aspect to have. 
-
-
+                <br>
+                <br>
+                After the grid search for best weights were carried out, the project group did some internal testing that showed that some expected movie titles were not given using the calculated weights. For example, this input: <i>a funny movie about a sponge that is best friends with a star</i> should give some output connected to Spongebob, but this was not the case for the given weights. Making the weights bigger than 0.1, like 0.5, solved the issue and gave a more expected result. The weight for sentiment analysis were kept at a lower value at 0.25. The previous descriptions given by the filmclub did also appear with these weights. 
+                <br>
+                <br>
+                <h3>Other problems discovered</h3>
+                When the program was tested, one test subject described the movie that he wanted to watch like this: "A movie with a lot of gore". As a human reader, it is clear that the user want to look at a horror movie, preferably with a lot of blood. Even a LLM application would probobly figure this out. However, the result from this program was all of <i>Al Gore's</i> (famous director) movies. This issue probobly comes from the keyword analysis. By using the components currently used in the program, this problem is hard to address, to solve it you need to add something that makes the program understand when something is a name and when its not, and to understand the intended meaning of words that might have two or more different meanings to them. 
+                <br>
+                <br>
+                <h3>Conclusions from evaluation</h3>
+                It is clear to see that the sentiment analysis does not point the program in the right direction according to the evaluation and the two other classifiers seems to be equally important for a good result. To keep the nature of the <i>three part classifier</i> each classifier will be kept. The embeddings and the keyoword classifiers will get the same weight and the sentiment analysis classifier will get a smaller one. The way that we choose weights can be improved further, but as of right now the program uses 0.5 for embeddings and keywords and 0.25 for sentiment analysis. The grid search gave a result that internal testing from the project group showed to be not effective in some cases. 
             </p>
         </section>
 

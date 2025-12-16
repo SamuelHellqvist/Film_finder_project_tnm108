@@ -15,9 +15,9 @@ emotion_vectors = np.load("test_data/emotion_vectors.npy")  # must be (num_movie
 
 def run_classifier(
     user_input,
-    w_emb: float = 1.0,  # Weight for embeddings
-    w_sent: float = 1.0, # Weight for sentiment
-    w_key: float = 1.0   # Weight for keywords
+    w_emb: float = 0.5,  # Weight for embeddings
+    w_sent: float = 0.25, # Weight for sentiment
+    w_key: float = 0.5   # Weight for keywords
 ):
     """Return the top 10 movie recommendations for a given text using weighted scores."""
 
