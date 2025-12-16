@@ -11,7 +11,8 @@
 </head>
 
 <body>
-
+    <div class="side-image left-side"></div>
+    <div class="side-image right-side"></div>
     <header>
         <div class="top-info-bar">
             <div class="course">TNM108 · Machine Learning for Social Media</div>
@@ -21,7 +22,6 @@
             </div>
             <div class="date">December 2025</div>
         </div>
-
         <h1>Film Finder</h1>
         <p class="subtitle">
             A machine learning based approach to movie recommendation using semantic, emotional, and keyword similarity
@@ -62,15 +62,17 @@
                 Describe the problem in a few sentences, explain why it is interesting
                 and define what you want to measure or predict. -->
 
-                There is many machine learning methods that can be used to classify texts. Texts can be broken down into keyword-, 
-                or emotion-vectors and then their similarity to other vectors can be measured using cosine similarity. 
-                In this application, we use three different ways of classifying user input to try to give a movie recommendation 
-                that takes the words and emotions connected to those words into account. 
+                There is many machine learning methods that can be used to classify texts. Texts can be broken down into
+                keyword-,
+                or emotion-vectors and then their similarity to other vectors can be measured using cosine similarity.
+                In this application, we use three different ways of classifying user input to try to give a movie
+                recommendation
+                that takes the words and emotions connected to those words into account.
                 <br>
                 <br>
                 The question that this project build upon is:
                 <br>
-                How can keyword similarity, sementic similarity and emotion similarity be used together in movie recommendation program?
+                How can keyword, semantic, and emotion-based similarity be combined in a movie recommendation system?
             </p>
         </section>
 
@@ -84,38 +86,58 @@
                 Describe how many rows and columns you have, which time period the data covers,
                 and mention any important variables.
                 <br>
-                A challenge for every ML-learning implementation is data. If the model has lacking 
-                or simply not enough data, the performance will be weakened. There is a couple of 
+                A challenge for every ML-learning implementation is data. If the model has lacking
+                or simply not enough data, the performance will be weakened. There is a couple of
                 ways that engineers deal with the problem of having to little data, like for example
                 creating synthetic data and training ones model on “made-up” data points [1].
-                In the case of this project however, this is not an option since we want to find real movies to 
-                recommend a potential viewer. The data also needs to fit the models implementation. For example, 
-                if the model is made to recognize movie reviews, the dataset can't contain movie synopses (and vice versa). 
-                The idea of this project was that the user can insert a descriptive text about the movie, and then get movies 
-                recommended that fit that description. So a fitting data collection is a set of movie descriptions. 
-                When choosing what to use as the base dataset for the project, a bunch of different datasets where compared 
+                In the case of this project however, this is not an option since we want to find real movies to
+                recommend a potential viewer. The data also needs to fit the models implementation. For example,
+                if the model is made to recognize movie reviews, the dataset can't contain movie synopses (and vice
+                versa).
+                The idea of this project was that the user can insert a descriptive text about the movie, and then get
+                movies
+                recommended that fit that description. So a fitting data collection is a set of movie descriptions.
+                When choosing what to use as the base dataset for the project, a bunch of different datasets where
+                compared
                 and looked at. The project group wanted a dataset that:
+<<<<<<< Updated upstream
                 <ul>
                     <li>Contains movie titles and descriptions/reviews</li>
                     <li>Is fairly up-to-date</li>
                     <li>Can be implemented in the model</li>
                     <li>Preferably have a lot of data</li>
                 </ul>
+=======
+            <ul>
+                <li>Contains movie titles and descriptions</li>
+                <li>Is fairly up-to-date</li>
+                <li>Can be implemented in the model</li>
+                <li>Preferably have a lot of data</li>
+            </ul>
+>>>>>>> Stashed changes
 
-                In the finished project, two different dataset were used. One was used for TF-IDF vector analysis. 
-                The dataset contained movie reviews and keyword extraction was used. The preprocessing and handling 
-                of this data comes from a previous project done by Mirijam Björn (mirbj463), Oscar Berglin (oscbe798), 
-                and Julia Karlsson (julka822) [2]. 
+            In the finished project, two different dataset were used. One was used for TF-IDF vector analysis.
+            The dataset contained movie reviews and keyword extraction was used. The preprocessing and handling
+            of this data comes from a previous project done by Mirijam Björn (mirbj463), Oscar Berglin (oscbe798),
+            and Julia Karlsson (julka822) [2].
 
-                <br>
-                <br>
+            <br>
+            <br>
 
-                The dataset that ended up as the base for the other two classifiers in project is a dataset that contains titles, 
-                genres, descriptions and other information from <a href="https://www.metacritic.com/">Metacritic</a>. The dataset 
-                contains over 
-                16 000 movies and are available though <a href=" https://www.kaggle.com/datasets/kashifsahil/16000-movies-1910-2024-metacritic">Kaggle</a>. 
-                With this dataset, a description of a movie could easily be connected to the movies title via indexing which fit the project perfectly. Keywords, sentiment and embeddings could be created from the descriptions. The set contains a very large number of movies, which hopefully will give the project high accuracy. The dataset is also fairly up to date and contains movies all the way to 2024. 
-                In conclusion, two different datasets were used together. One of them was used for keyword extraction and the input could be classified using TF-IDF vectorization. The other one were used for sentiment analysis and embeddings, were the input by the user were compared to all descriptions from the dataset. 
+            The dataset that ended up as the base for the other two classifiers in project is a dataset that contains
+            titles,
+            genres, descriptions and other information from <a href="https://www.metacritic.com/">Metacritic</a>. The
+            dataset
+            contains over
+            16 000 movies and are available though <a
+                href=" https://www.kaggle.com/datasets/kashifsahil/16000-movies-1910-2024-metacritic">Kaggle</a>.
+            With this dataset, a description of a movie could easily be connected to the movies title via indexing which
+            fit the project perfectly. Keywords, sentiment and embeddings could be created from the descriptions. The
+            set contains a very large number of movies, which hopefully will give the project high accuracy. The dataset
+            is also fairly up to date and contains movies all the way to 2024.
+            In conclusion, two different datasets were used together. One of them was used for keyword extraction and
+            the input could be classified using TF-IDF vectorization. The other one were used for sentiment analysis and
+            embeddings, were the input by the user were compared to all descriptions from the dataset.
             </p>
         </section>
 
@@ -275,12 +297,15 @@
                 there is three separate classifiers, three weights were used. These weights could me set manually to
                 create another mix of the classifiers. The bigger the weight, the more it that classifier affects the
                 end result. To test out what set of weights give the best results, a grid search was used. Grid search
-                is used as a technique to test hyperparameters for a model in a fast way [3]. The project group decided to gather user inputs by asking members
-                of a <a href="https://www.stubinen.org/">film club</a> to write a description of their favorite movie. The description
+                is used as a technique to test hyperparameters for a model in a fast way [3]. The project group decided
+                to gather user inputs by asking members
+                of a <a href="https://www.stubinen.org/">film club</a> to write a description of their favorite movie.
+                The description
                 contained one free form text and one set of keywords. This data was previously unseen by any models used
                 and not connected to the dataset.
                 <br>
                 <br>
+<<<<<<< Updated upstream
                 To perform hyperparameter optimization the description written by the test-persons were used in a scripts that looped over different combinations of parameters for the three different classifiers.
 
                 A python scripts that looked at combinations of different weights were created by the project group (sätt in bild här). The results found is displayed in the image bellow:
@@ -303,6 +328,19 @@
                 <br>
                 <h3>Conclusions from evaluation</h3>
                 It is clear to see that the sentiment analysis does not point the program in the right direction according to the evaluation and the two other classifiers seems to be equally important for a good result. To keep the nature of the <i>three part classifier</i> each classifier will be kept. The embeddings and the keyoword classifiers will get the same weight and the sentiment analysis classifier will get a smaller one. The way that we choose weights can be improved further, but as of right now the program uses 0.5 for embeddings and keywords and 0.25 for sentiment analysis. The grid search gave a result that internal testing from the project group showed to be not effective in some cases. 
+=======
+                To perform hyperparameter optimization the description written by the test-persons were used in a
+                scripts that looped over different combinations of parameters for the three different classifiers. It
+                was found that sentiment analysis was the classifier that a low weight for the sentiment analysis gave
+                the best result, and the other two classifiers was similarly accurate and would therefore get the same
+                weight.
+                We must not forget however that the test data used were descriptions of certain movies, and performance
+                was measured by checking if the program could pick out that particular movie from the dataset. The idea
+                of the program however is to recommend movies, and in that case sentiment analysis might be a good
+                aspect to have.
+
+
+>>>>>>> Stashed changes
             </p>
         </section>
 
@@ -311,10 +349,19 @@
             <h2>Summary of findings and answer to the research question</h2>
             <div class="gradient-line"></div>
             <p>
-                Summarize the most important results in clear language.
-                Give a direct answer to the research question, mention limitations
-                and, if relevant, suggest ideas for future work or improvements.
+
+                This project investigated how semantic similarity, keyword similarity, and emotion similarity can be
+                combined in a text-based movie recommendation system.
+
+                The results show that combining multiple similarity models improves recommendation quality compared to
+                using a single method. Semantic similarity was the most influential model, as it captures the overall
+                meaning of the user’s input even when different wording is used. Keyword-based similarity performed well
+                when specific terms were included, while emotion-based similarity helped align recommendations with the
+                emotional tone of the input, although its impact was more limited.
+
+
             </p>
+
         </section>
 
         <section id="references">
@@ -325,13 +372,15 @@
                     Coursera. (2025)
                     <i>What Is Synthetic Data</i>
                     Coursera website
-                    <a href="https://www.coursera.org/articles/what-is-synthetic-data?utm_medium=sem&utm_source=gg&utm_campaign=b2c_emea_x_multi_ftcof_career-academy_cx_dr_bau_gg_pmax_gc_s1_en_m_hyb_23-12_desktop&campaignid=20858198824&adgroupid=&device=c&keyword=&matchtype=&network=x&devicemodel=&creativeid=&assetgroupid=6490027433&targetid=&extensionid=&placement=&gad_source=1&gad_campaignid=20854471652&gbraid=0AAAAADdKX6a-x_WdZBMVUZ-c06G1YWAbn&gclid=Cj0KCQiAgP_JBhD-ARIsANpEMxx3Znas3eOn09WZoNUgtuHSzwpS34WhbiSMp10Tzn5hl7cXPCeAoLAaAk0XEALw_wcB">https://www.coursera.org/articles/what-is-synthetic-data?</a>
+                    <a
+                        href="https://www.coursera.org/articles/what-is-synthetic-data?utm_medium=sem&utm_source=gg&utm_campaign=b2c_emea_x_multi_ftcof_career-academy_cx_dr_bau_gg_pmax_gc_s1_en_m_hyb_23-12_desktop&campaignid=20858198824&adgroupid=&device=c&keyword=&matchtype=&network=x&devicemodel=&creativeid=&assetgroupid=6490027433&targetid=&extensionid=&placement=&gad_source=1&gad_campaignid=20854471652&gbraid=0AAAAADdKX6a-x_WdZBMVUZ-c06G1YWAbn&gclid=Cj0KCQiAgP_JBhD-ARIsANpEMxx3Znas3eOn09WZoNUgtuHSzwpS34WhbiSMp10Tzn5hl7cXPCeAoLAaAk0XEALw_wcB">https://www.coursera.org/articles/what-is-synthetic-data?</a>
                 </li>
-                 <li>
+                <li>
                     Mirijam Björk, Oscar Berglin, Julia Karlsson
                     <i>Reverse Movie Review</i>
                     TNM108 blog
-                    <a href="https://dellacqua.se/education/courses/tnm108/material/project%20archive/2024/p10%202024.pdf">https://dellacqua.se/education/courses/tnm108/material/project%20archive/2024/p10%202024.pdf</a>
+                    <a
+                        href="https://dellacqua.se/education/courses/tnm108/material/project%20archive/2024/p10%202024.pdf">https://dellacqua.se/education/courses/tnm108/material/project%20archive/2024/p10%202024.pdf</a>
                 </li>
                 <li>
                     Scikit-learn developers. (2024).
@@ -365,18 +414,16 @@
                         href="https://huggingface.co/j-hartmann/emotion-english-distilroberta-base">https://huggingface.co/j-hartmann/emotion-english-distilroberta-base</a>
                 </li>
                 <li>
-                    H2O 
+                    H2O
                     <i>Grid Search What is Grid Search?</i>
                     H2O website
-                    <a 
-                    href="https://h2o.ai/wiki/grid-search/">https://h2o.ai/wiki/grid-search/</a>
+                    <a href="https://h2o.ai/wiki/grid-search/">https://h2o.ai/wiki/grid-search/</a>
                 </li>
             </ol>
         </section>
 
     </main>
-    <div class="side-image left-side"></div>
-    <div class="side-image right-side"></div>
+
 
 </body>
 
