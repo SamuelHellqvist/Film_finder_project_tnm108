@@ -5,3 +5,5 @@ __pycache__/
 __pycache__/2
 __pycache__/3
 .DS_Store
+/combined_classifier/__pycache__
+*.pyc

@@ -32,7 +32,7 @@ desc_texts = df['Description'].tolist()
 
 #text = ("Ed and Lorraine Warren, world-renowned investigators of supernatural events, are called in to help a family terrorized by dark forces. In the family’s house, deep in the countryside, the Warrens are forced to confront a powerful demonic presence.")
 #text = desc_texts[5]
-text = "this is a scary movie. very scary and frightening with a lot of suspense and horror elements. but alos, i am angry and feeling bad"
+text = "A movie about a family dealing with loss after an unexpected event."
 #text = "A hilarious space adventure where the hero travels between planets and fights monsters, filled with comedy and fun moments."
 inputs = tokenizer(text, return_tensors="pt")
 
@@ -55,6 +55,7 @@ EMOTION_LABELS = ['anger', 'disgust', 'fear', 'joy', 'neutral', 'sadness', 'surp
 # 4. Print all emotions sorted by score
 scores_list = list(zip(EMOTION_LABELS, probs_np))
 scores_list.sort(key=lambda x: x[1], reverse=True)
+print("\nthe input text :", text)
 
 print("All emotions sorted:")
 for label, score in scores_list:

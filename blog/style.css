@@ -142,3 +142,36 @@ p {
     border-radius: 8px;
     margin: 20px 0;
 }
+
+@media print {
+  @page { margin: 12mm; }
+
+  /* reduce side images so content fits on A4 */
+  body {
+    background: white;
+    padding-left: 110px;
+    padding-right: 110px;
+  }
+
+  .side-image {
+    width: 110px;
+    opacity: 0.9; /* makes text more readable */
+    filter: blur(6px) saturate(20%) brightness(0.95);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* make the main column adapt to page width */
+  header, main {
+    max-width: none;
+    width: auto;
+    margin: 0 auto;
+    padding: 0 10mm;
+  }
+
+  /* avoid screenshots being cut badly */
+  .screenshot_image {
+    max-width: 100%;
+    height: auto;
+  }
+}
