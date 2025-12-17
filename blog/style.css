@@ -175,3 +175,14 @@ p {
     height: auto;
   }
 }
+figure {
+  margin: 30px auto;
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-persian-indigo);
+  opacity: 0.85;
+}

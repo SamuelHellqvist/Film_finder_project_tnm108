@@ -72,19 +72,22 @@
                 <br>
                 The question that this project build upon is:
                 <br>
-                How can keyword, semantic, and emotion-based similarity be combined in a movie recommendation system?
+                <ul>
+                    <li>How can keyword, semantic, and emotion-based similarity be combined in a movie recommendation system?</li>
+                </ul>
             </p>
         </section>
 
         <!-- Data collection -->
         <section id="data-collection (samuel)">
-            <h2>Data collection (Samuel)</h2>
+            <h2>Data collection </h2>
             <div class="gradient-line"></div>
-            <p>
-                Explain where the data comes from.
+              <!--Explain where the data comes from.
                 For example, scraped from a social media platform or taken from a public dataset.
                 Describe how many rows and columns you have, which time period the data covers,
-                and mention any important variables.
+                and mention any important variables.-->
+            <p>
+              
                 <br>
                 A challenge for every ML-learning implementation is data. If the model has lacking
                 or simply not enough data, the performance will be weakened. There is a couple of
@@ -154,7 +157,11 @@
             </p>
 
             <p>Here’s the data cleaning step we used:</p>
-            <img src="screenshot1.png" alt="Screenshot of data cleaning step" class="screenshot_image" />
+            <figure>
+                <img src="screenshot1.png" alt="Screenshot of data cleaning code" class="screenshot_image" />
+                <figcaption> Figure 1: Data cleaning code snippet </figcaption>
+            </figure>
+
             <p>While the dataset itself was not deduplicated during preprocessing, duplicate movie titles were handled
                 at
                 the output stage to improve the clarity of recommendations presented to the user. </p>
@@ -176,8 +183,12 @@
                 embeddings. At runtime, the user’s input was embedded using the same model to produce a comparable
                 numerical representation. This allows movies with similar meaning to be matched even when different
                 wording is used [3].
-                <img src="screenshot2.png" alt="Screenshot of embedding generation step" class="screenshot_image" />
             </p>
+            <figure>
+                <img src="screenshot2.png" alt="Screenshot of semantic embedding generation step"
+                    class="screenshot_image" />
+                    <figcaption> Figure 2: Semantic embedding generation step </figcaption>
+            </figure>
 
             <!-- emotion classifier -->
             <p>
@@ -188,9 +199,14 @@
                 a corresponding emotion probability distribution. This representation captures the emotional
                 characteristics of the input text and enables comparison with the emotional profiles of movie
                 descriptions [4].
-                <img src="screenshot3.png" alt="Screenshot of emotion vector generation step"
-                    class="screenshot_image" />
+                
             </p>
+            <figure>
+                <img src="screenshot3.png" alt="Screenshot of emotion probability distribution generation step"
+                    class="screenshot_image" />
+                    <figcaption> Figure 3: Emotion probability distribution generation step </figcaption>
+            </figure>
+
 
             <!-- TF-IDF classifier -->
             <p>
@@ -201,8 +217,13 @@
                 vectorizer. This representation highlights important keywords and terms that can later be used to
                 compare the user input with movie descriptions [2].
                 <br>
-                <img src="screenshot4.png" alt="Screenshot of TF-IDF vectorization step" class="screenshot_image" />
             </p>
+            <figure>
+                <img src="screenshot4.png" alt="Screenshot of TF-IDF vectorization step"
+                    class="screenshot_image" />
+                    <figcaption> Figure 4: TF-IDF vectorization step </figcaption>
+            </figure>
+
             <p>
                 By using these three representations, each movie description could be analyzed from multiple
                 perspectives: semantic meaning, emotional tone, and keyword relevance.
@@ -276,13 +297,13 @@
 
         <!-- Evaluation -->
         <section id="evaluation ">
-            <h2>Evaluation (Samuel)</h2>
+            <h2>Evaluation </h2>
             <div class="gradient-line"></div>
             <p>
-                Explain how model performance was measured.
+                <!--Explain how model performance was measured.
                 Mention metrics such as accuracy, precision, recall, F1 score, RMSE or similar,
                 and describe what the numbers mean in your context.
-                If you compared several models, state which one worked best.
+                If you compared several models, state which one worked best.-->
                 <br>
                 Evaluating ones model is a important part of development of ai tools. In the case of this project, where
                 there is three separate classifiers, three weights were used. These weights could me set manually to
@@ -300,12 +321,22 @@
 
                 A python scripts that looked at combinations of different weights were created by the project group. 
                 <br>
-                <img src="evaluation_code.png" alt=" Screenshot of Python code used to evaluate different parameters" class="screenshot_image">
+                <figure>
+                    <img src="evaluation_code.png" alt="Screenshot of grid search code"
+                        class="screenshot_image" />
+                        <figcaption> Figure 5: Grid search code snippet </figcaption>
+                </figure>
+
                 <br>
                 The results found is displayed in the image bellow:
                 <br>
                 <br>
-                <img src="results.PNG" alt="Results from the evaluation">
+                <figure>
+                    <img src="results.png" alt="Screenshot of grid search results"
+                        class="screenshot_image" />
+                        <figcaption> Figure 6: Grid search results </figcaption>
+                </figure>
+
                 <br>
                 <br>
                 It was found that a low weight (or actaully, no contribution) for the sentiment analysis gave the best result, and the other two classifiers was similarly accurate and would therefore get the same weight. 
