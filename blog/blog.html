@@ -79,7 +79,7 @@
         </section>
 
         <!-- Data collection -->
-        <section id="data-collection (samuel)">
+        <section id="data-collection">
             <h2>Data collection </h2>
             <div class="gradient-line"></div>
               <!--Explain where the data comes from.
@@ -91,7 +91,7 @@
                 <br>
                 A challenge for every ML-learning implementation is data. If the model has lacking
                 or simply not enough data, the performance will be weakened. There is a couple of
-                ways that engineers deal with the problem of having to little data, like for example
+                ways that engineers deal with the problem of having too little data, like for example
                 creating synthetic data and training ones model on “made-up” data points [1].
                 In the case of this project however, this is not an option since we want to find real movies to
                 recommend a potential viewer. The data also needs to fit the models implementation. For example,
@@ -118,7 +118,7 @@
             <br>
             <br>
 
-            The dataset that ended up as the base for the other two classifiers in project is a dataset that contains
+            The dataset that ended up as the base for the other two classifiers in the project is a dataset that contains
             titles,
             genres, descriptions and other information from <a href="https://www.metacritic.com/">Metacritic</a>. The
             dataset
@@ -129,6 +129,8 @@
             fit the project perfectly. Keywords, sentiment and embeddings could be created from the descriptions. The
             set contains a very large number of movies, which hopefully will give the project high accuracy. The dataset
             is also fairly up to date and contains movies all the way to 2024.
+            <br>
+            <br>
             In conclusion, two different datasets were used together. One of them was used for keyword extraction and
             the input could be classified using TF-IDF vectorization. The other one were used for sentiment analysis and
             embeddings, were the input by the user were compared to all descriptions from the dataset.
@@ -306,8 +308,8 @@
                 If you compared several models, state which one worked best.-->
                 <br>
                 Evaluating ones model is a important part of development of ai tools. In the case of this project, where
-                there is three separate classifiers, three weights were used. These weights could me set manually to
-                create another mix of the classifiers. The bigger the weight, the more it that classifier affects the
+                there is three separate classifiers, three weights were used. These weights could be set manually to
+                create another mix of the classifiers. The bigger the weight, the more that classifier effects the
                 end result. To test out what set of weights give the best results, a grid search was used. Grid search
                 is used as a technique to test hyperparameters for a model in a fast way [3]. The project group decided
                 to gather user inputs by asking members
@@ -317,9 +319,10 @@
                 and not connected to the dataset.
                 <br>
                 <br>
-                To perform hyperparameter optimization the description written by the test-persons were used in a scripts that looped over different combinations of parameters for the three different classifiers.
-
                 A python scripts that looked at combinations of different weights were created by the project group. 
+                To perform hyperparameter optimization the description written by the test-persons were used in the script. The script looped over different combinations of parameters for the three different classifiers.
+
+               
                 <br>
                 <figure>
                     <img src="evaluation_code.png" alt="Screenshot of grid search code"
@@ -339,7 +342,7 @@
 
                 <br>
                 <br>
-                It was found that a low weight (or actaully, no contribution) for the sentiment analysis gave the best result, and the other two classifiers was similarly accurate and would therefore get the same weight. 
+                It was found that a low weight (or actually, no contribution) for the sentiment analysis gave the best result, and the other two classifiers was similarly accurate and would therefore get the same weight. 
                 The results shows that the model do have a hard time finding the movies that the users is looking for, since a accuracy of 0.4 is not particularly high. Other models, more or different data could be sollutions to this porblem. 
                 We must not forget however that the test data used were descriptions of certain movies, and performance was measured by checking if the program could pick out that particular movie from the dataset. The idea of the program however is to recommend movies, and in that case sentiment analysis might be a good aspect to have. 
                 <br>
@@ -348,7 +351,7 @@
                 <br>
                 <br>
                 <h3>Other problems discovered</h3>
-                When the program was tested, one test subject described the movie that he wanted to watch like this: "A movie with a lot of gore". As a human reader, it is clear that the user want to look at a horror movie, preferably with a lot of blood. Even a LLM application would probobly figure this out. However, the result from this program was all of <i>Al Gore's</i> (famous director) movies. This issue probobly comes from the keyword analysis. By using the components currently used in the program, this problem is hard to address, to solve it you need to add something that makes the program understand when something is a name and when its not, and to understand the intended meaning of words that might have two or more different meanings to them. 
+                When the program was tested, one test subject described the movie that he wanted to watch like this: "A movie with a lot of gore". As a human reader, it is clear that the user want to see a horror movie, preferably with a lot of blood. Even a LLM application would probobly figure this out. However, the result from this program was all of <i>Al Gore's</i> (famous director) movies. This issue probobly comes from the keyword analysis. By using the components currently used in the program, this problem is hard to address. To solve it you need to add something that makes the program understand when something is a name and when its not, and to understand the intended meaning of words that might have two or more different meanings to them. 
                 <br>
                 <br>
                 <h3>Conclusions from evaluation</h3>
@@ -372,7 +375,7 @@
                 emotional tone of the input, although its impact was more limited.
                 <br>
                 <br>
-                The project has a lot of different parts that helped shape the finished product. To achieve a movie recommender, data need to be collected and validated, as in every ML application, more data helps. The data needs to be modified to fit the classifiers used in the program. The three different classifiers can be combined in many different ways. The emotion-based similarity helps the program find movies that match the input on an emotional level or mood, while the other two help the user get recommendations based on what actual words and sentences are inputted. Each one of the classifiers can recommend movies, but using all three can give the user recommendations that work closer to the input, both regarding what words we use but also which emotions those words are connected to. 
+                The project has a lot of different parts that helped shape the finished product. To achieve a movie recommender, data need to be collected and validated, as in every ML application, more data helps. The data needs to be modified to fit the classifiers used in the program. The three different classifiers can be combined in many different ways. The emotion-based similarity helps the program find movies that match the input on an emotional level, while the other two help the user get recommendations based on what actual words and sentences are inputted. Each one of the classifiers can recommend movies, but using all three can give the user recommendations that work closer to the input, both regarding what words we use but also which emotions those words are connected to. 
 
 
 
