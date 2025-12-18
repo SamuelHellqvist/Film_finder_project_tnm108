@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-from .classifier_embeddings import classify as classify_embeddings
-from .classifier_sentiment import classify as classify_sentiment
-from .classifier_keywords import classify as classify_keywords
+from combined_classifier.ML.classifier_embeddings import classify as classify_embeddings
+from combined_classifier.ML.classifier_sentiment import classify as classify_sentiment
+from combined_classifier.ML.classifier_keywords import classify as classify_keywords
 
 # Load movie data from CSV
 movies_df = pd.read_csv("test_data/16k_Movies.csv")
