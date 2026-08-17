@@ -1,11 +1,16 @@
 This is how you run the evaluation.py script:
 
-1. Open git bash
+1. Go to the parent directory:
+cd c:\Users\samue\GitHub\Film_finder_project_tnm108
 
-2. Go to the parent directory. For exampel:
-Documents\GitHub\Film_finder_project_tnm108
+2. OPTION A - Using PowerShell (recommended):
+.venv\Scripts\python.exe -m combined_classifier.ML.evaluation
 
-3. Run this line in bash:
+3. OPTION B - Using Git Bash:
+source .venv/Scripts/activate
 python -m combined_classifier.ML.evaluation
 
 4. Done!
+
+NOTE: Make sure all dependencies are installed first by running:
+.venv\Scripts\python.exe -m pip install -r requirements.txt
